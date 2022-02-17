@@ -13,7 +13,7 @@ Vagrant virtual machine:
 - the first admin user will be created within TFE to use with settings created under ```/vagrant/config/create_tfe_user.json```
 
 # Documentation references
-HashiCorp official documentation: [See here](https://www.terraform.io/enterprise/install/interactive/installer#alternative-terraform-worker-image)
+HashiCorp official documentation: [See here](https://www.terraform.io/enterprise/install/interactive/installer#alternative-terraform-worker-image)  
 HashiCorp Engineer Github Repo on building custom workers: [See here](https://github.com/straubt1/tfe-alternative-worker)
 
 # Prerequisites
@@ -65,13 +65,13 @@ sudo docker build -t patrick .
 - Go to the TFE dashboard and click on the link for the TFE application
 
 
-- create a first account  
+- create a first account   
 ![](media/2022-02-17-13-29-22.png)  
-- create an organisation ```patricktest```
+- create an organisation ```patricktest```  
 ![](media/2022-02-17-13-31-51.png)  
-- create a new workspace with CLI-driven workflow
+- create a new workspace with CLI-driven workflow  
 ![](media/2022-02-17-13-32-03.png)  
-- create a workspace named test
+- create a workspace named test  
 ![](media/2022-02-17-13-32-36.png)  
 
 ## run terraform with the custom image
@@ -94,36 +94,16 @@ terraform plan
 ```
 - run terraform apply
 ```
-- login to your TFE environment and look at the runs 
-![](media/2022-02-17-13-40-47.png)  
-
-
-
-
-
-
-
-
-
-- create a terraform run
-```
 terraform apply
 ```
-
-Changed the worker from default to something that doesn't exist and I get an error
-
-Preparing the remote plan...
-
-To view this run in a browser, visit:
-https://192.168.56.33.nip.io/app/patricktest/test/runs/run-FvMzLV882PxV7Ff7
-
-Waiting for the plan to start...
-
+output
 ```
-Setup failed: Failed setting up Terraform binary: Failed pushing binary to environment: exit status 125
+null_resource.patrick2: Creating...
+null_resource.patrick: Creating...
+null_resource.patrick: Creation complete after 0s [id=9087627740534579712]
+null_resource.patrick2: Creation complete after 0s [id=7469545037961622205]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 ```
-
-## getting the certificate that has to be used by the custom worker
-openssl s_client -host 192.168.56.33.nip.io -port 443 -prexit -showcerts
-
-echo -n | openssl s_client -connect 192.168.56.33.nip.io:443 | openssl x509 > tfe_certificate.crt
+- login to your TFE environment and look at the runs   
+![](media/2022-02-17-13-40-47.png)  
